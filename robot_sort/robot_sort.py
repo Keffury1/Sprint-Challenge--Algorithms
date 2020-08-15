@@ -98,21 +98,25 @@ class SortingRobot:
         for i in range(len(self._list)-1):
             self.swap_item()
             if self.can_move_right():
-                self.move_right()
-                if self.compare_item() == 1:
-                    self.swap_item()
-                    self.move_left()
-                    self.swap_item()
-                    self.set_light_on()
-                else:
-                    self.move_left()
-                    self.swap_item()
-                    self.move_right()
+                self.sort_helper()
 
         if self.light_is_on():
             while self.can_move_left():
                 self.move_left()
             self.sort()
+
+
+    def sort_helper(self):
+        self.move_right()
+        if self.compare_item() == 1:
+            self.swap_item()
+            self.move_left()
+            self.swap_item()
+            self.set_light_on()
+        else:
+            self.move_left()
+            self.swap_item()
+            self.move_right()
 
 
 if __name__ == "__main__":
